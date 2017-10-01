@@ -43,6 +43,11 @@ const server = new WebpackDevServer(compiler, {
   historyApiFallback: true,
   hot: true,
   contentBase: './public',
-  stats: 'errors-only'
+  stats: 'errors-only',
+  setup: (app) => {
+    // app.post('/event', function (req, res) {
+    //   res.send('200OK');
+    // })
+  }
 })
 server.listen(port)
