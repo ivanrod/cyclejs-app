@@ -2,22 +2,19 @@ import {div} from '@cycle/dom'
 import xs from 'xstream'
 import {html} from 'snabbdom-jsx'
 
-export function App (sources) {
-  const vtree$ = sources.DOM.select('input').events('change')
-  .map(ev => {
-    const { target: { value, id } } = ev;
-    return {
-      [id]: value
-    }
-  })
-  .fold((acc, next) => {
+const getChangeValues = sources => nodeName => sources.DOM.select(`#${nodeName}`)
+  .events('change')
+  .map(ev => ev.target.value)
 
-    return {
-      ...acc,
-      ...next
-    }
-  }, false)
-  .map(({ date, time }) =>
+export function App (sources) {
+
+  const date$ = getChangeValues(sources)('date')
+                .startWith(new Date())
+  const time$ = getChangeValues(sources)('time')
+                .startWith(new Date())
+
+  const vtree$ = xs.combine(date$, time$)
+  .map(([date, time]) =>
     <div>
       <header>
         <h1>waitForMe</h1>
