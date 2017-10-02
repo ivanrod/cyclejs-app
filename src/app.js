@@ -9,12 +9,14 @@ const getChangeValues = sources => nodeName => sources.DOM.select(`#${nodeName}`
 export function App (sources) {
 
   const date$ = getChangeValues(sources)('date')
-                .startWith(new Date())
+  .startWith(new Date())
   const time$ = getChangeValues(sources)('time')
-                .startWith(new Date())
+  .startWith(new Date())
 
-  const vtree$ = xs.combine(date$, time$)
-  .map(([date, time]) =>
+  const state$ = xs.combine(date$, time$)
+  .map(([date, time]) => ({date, time}))
+
+  const vtree$ = state$.map(({date, time}) =>
     <div>
       <header>
         <h1>waitForMe</h1>
