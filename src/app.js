@@ -14,21 +14,30 @@ const EventCreate = ({date, time}) => {
     </div>
   )
 }
-const getChangeValues = sources => nodeName => sources.DOM.select(`#${nodeName}`)
+
+const getChangeValues = domSource => nodeName => domSource.select(`#${nodeName}`)
   .events('change')
   .map(ev => ev.target.value)
 
-export function App (sources) {
+const intent = (domSource) => {
+  return {
+    changeDate$: getChangeValues(domSource)('date'),
+    changeTime$: getChangeValues(domSource)('time')
+  }
+}
 
-  const date$ = getChangeValues(sources)('date')
+const model = ({changeDate$, changeTime$}) => {
+  const date$ = changeDate$
   .startWith(new Date())
-  const time$ = getChangeValues(sources)('time')
+  const time$ = changeTime$
   .startWith(new Date())
 
-  const state$ = xs.combine(date$, time$)
+  return xs.combine(date$, time$)
   .map(([date, time]) => ({date, time}))
+}
 
-  const vtree$ = state$.map(({date, time}) =>
+const view = state$ => {
+  return state$.map(({date, time}) =>
     <div>
       <header>
         <h1>waitForMe</h1>
@@ -38,6 +47,16 @@ export function App (sources) {
       </article>
     </div>
   )
+}
+
+export function App (sources) {
+
+  const actions = intent(sources.DOM)
+
+  const state$ = model(actions)
+
+  const vtree$ = view(state$)
+  
   const sinks = {
     DOM: vtree$
   }
