@@ -1,21 +1,9 @@
 import {div} from '@cycle/dom'
 import xs from 'xstream'
 import {html} from 'snabbdom-jsx'
+import {EventCreate}  from '../EventCreate'
 
-const EventCreate = ({date, time}) => {
-  return (
-    <div>
-        <h2>Event</h2>
-        <input id="date" type="date" name="event-date" />
-        <p>Date selected: {date}</p>
-        <input id="time" type="time" name="event-time" />
-        <p>Time selected: {time}</p>
-        <button>Create</button>
-    </div>
-  )
-}
-
-const getChangeValues = domSource => nodeName => domSource.select(`#${nodeName}`)
+const getChangeValues = domSource => nodeName => domSource.select(`.${nodeName}`)
   .events('change')
   .map(ev => ev.target.value)
 
