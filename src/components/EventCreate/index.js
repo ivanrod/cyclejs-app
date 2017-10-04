@@ -1,15 +1,15 @@
 import xs from 'xstream'
-import {html} from 'snabbdom-jsx'
+import { div, h2, input, p, button } from '@cycle/dom';
 
 export const EventCreate = ({date, time}) => {
   return (
-    <div>
-        <h2>Event</h2>
-        <input className="date" type="date" name="event-date" />
-        <p>Date selected: {date}</p>
-        <input className="time" type="time" name="event-time" />
-        <p>Time selected: {time}</p>
-        <button>Create</button>
-    </div>
+    div([
+      h2('Event'),
+      input(`.date`, {attrs: {type: 'date', name: 'event-date'}}),
+      p(`Date selected: ${date}`),
+      input(`.time`, {attrs: {type: 'time', name: 'event-time'}}),
+      p(`Time selected: ${time}`),
+      button('Create picorsito')
+    ])
   )
 }

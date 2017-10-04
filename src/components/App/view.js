@@ -1,15 +1,15 @@
-import {html} from 'snabbdom-jsx'
+import { div, h1, header, article } from '@cycle/dom';
 import {EventCreate}  from '../EventCreate'
 
 export default state$ => {
-  return state$.map(({date, time}) =>
-    <div>
-      <header>
-        <h1>waitForMe</h1>
-      </header>
-      <article>
-        <EventCreate date={date} time={time} />
-      </article>
-    </div>
+  return state$.map(({date, time}) => 
+    div([
+      header(`.header`,
+        h1(`.title`, 'waitForMe!')
+      ),
+      article(`.body`,
+        EventCreate({date, time})
+      )
+    ])
   )
 }
