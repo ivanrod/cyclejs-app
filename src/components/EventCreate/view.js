@@ -16,7 +16,7 @@ export default state$ => {
         option({attrs: { value: 'Lugo' }}),
       ]),
       p(`Location: ${location}`),
-      button("Create")
+      button('.create', "Create")
     ])
   )
 }

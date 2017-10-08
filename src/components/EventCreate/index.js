@@ -6,13 +6,13 @@ import view from './view'
 
 export default function EventCreate({DOM:domSource, props$}) {
   const actions = intent(domSource)
-  
+
   const state$ = model(actions, props$)
 
   const vdom$ = view(state$)
 
   const sinks = {
-    DOM: vdom$
+    DOM: vdom$,
   }
   
   return sinks

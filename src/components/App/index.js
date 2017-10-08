@@ -5,11 +5,11 @@ import view from './view'
 import {IsolatedEventCreate} from '../EventCreate'
 
 export function App (sources) {
-  const eventCreateProps$ = xs.of({initialDate: new Date(), initialTime:'00:00'})
+  const eventCreateProps$ = xs.of({initialDate: Date(), initialTime:'00:00'})
 
   const eventCreate = IsolatedEventCreate({
     DOM: sources.DOM,
-    props$: eventCreateProps$
+    props$: eventCreateProps$,
   })
 
   const actions = intent(sources.DOM)

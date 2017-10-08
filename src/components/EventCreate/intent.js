@@ -6,5 +6,6 @@ export default (domSource) => {
   return {
     changeDate$: getChangeValues(domSource)('date'),
     changeTime$: getChangeValues(domSource)('time'),
+    changeLocation$: getChangeValues(domSource)('location'),
   }
 }
