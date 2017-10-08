@@ -5,7 +5,7 @@ import view from './view'
 import {IsolatedEventCreate} from '../EventCreate'
 
 export function App (sources) {
-  const eventCreateProps$ = xs.of({initialDate: 'pene', initialTime:'00:00'})
+  const eventCreateProps$ = xs.periodic(100).map(p=>({initialDate: Date(), initialTime:'00:00'}))
 
   const eventCreate = IsolatedEventCreate({
     DOM: sources.DOM,

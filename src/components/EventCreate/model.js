@@ -6,35 +6,26 @@ const INIT_STATE = {
   location: 'Not defined'
 }
 
+const modifyStatePropertyReducer = action => type => property => action
+    .filter(a => a.type === type)
+    .map(action => state => {
+      return {
+        ...state,
+        [property]: action.payload}
+    })
+
 export default (action$, props$) => {
   const propsReducer$ = props$.map(props => state => ({
     ...state,
     date: props.initialDate || state.date,
     time: props.initialTime || state.time,
     location: props.initialLocation || state.location
-  }))
+  })).take(1)
 
-  const dateReducer$ = action$
-    .filter(a => a.type === 'CHANGE_DATE')
-    .map(action => oldState => {
-      return {
-        ...oldState,
-        date: action.payload}
-    })
-  const timeReducer$ = action$
-    .filter(a => a.type === 'CHANGE_TIME')
-    .map(action => oldState => {
-      return {
-        ...oldState,
-        time: action.payload}
-    })
-  const locationReducer$ = action$
-    .filter(a => a.type === 'CHANGE_LOCATION')
-    .map(action => oldState => {
-      return {
-        ...oldState,
-        location: action.payload}
-    })
+  const dateReducer$ = modifyStatePropertyReducer(action$)('CHANGE_DATE')('date')
+  const timeReducer$ = modifyStatePropertyReducer(action$)('CHANGE_TIME')('time')
+  const locationReducer$ = modifyStatePropertyReducer(action$)('CHANGE_LOCATION')('location')
+
   return xs.merge(propsReducer$, dateReducer$, timeReducer$, locationReducer$)
     .fold((state, reducer) => reducer(state), INIT_STATE)
 }
