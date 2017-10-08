@@ -9,8 +9,16 @@ export default (state$, eventCreateDOM) => {
         header(`.header`,
           h1(`.title`, 'waitForMe!')
         ),
-        article(`.body`,
-          eventCreate
+        article({
+          style: {
+              backgroundColor: '#58D3D8',
+              borderRadius: '10px'
+            }
+          },
+          [
+            eventCreate,
+            
+          ]
         )
       ])
   )
