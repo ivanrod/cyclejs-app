@@ -1,14 +1,40 @@
 import xs from 'xstream'
 
-export default ({changeDate$, changeTime$, changeLocation$}, props$) => {
-  const initalDate$ = props$.map(props => props.initialDate || Date()).take(1);
-  const date$ = xs.merge(changeDate$, initalDate$)
+const INIT_STATE = {
+  date: Date(),
+  time: '00:00',
+  location: 'Not defined'
+}
 
-  const initialTime$ = props$.map(props => props.initialTime || '00:00').take(1)
-  const time$ = xs.merge(changeTime$, initialTime$)
+export default (action$, props$) => {
+  const propsReducer$ = props$.map(props => state => ({
+    ...state,
+    date: props.initialDate || state.date,
+    time: props.initialTime || state.time,
+    location: props.initialLocation || state.location
+  }))
 
-  const location$ = changeLocation$.startWith('Not defined')
-
-  return xs.combine(date$, time$, location$)
-  .map(([date, time, location]) => ({date, time, location}))
+  const dateReducer$ = action$
+    .filter(a => a.type === 'CHANGE_DATE')
+    .map(action => oldState => {
+      return {
+        ...oldState,
+        date: action.payload}
+    })
+  const timeReducer$ = action$
+    .filter(a => a.type === 'CHANGE_TIME')
+    .map(action => oldState => {
+      return {
+        ...oldState,
+        time: action.payload}
+    })
+  const locationReducer$ = action$
+    .filter(a => a.type === 'CHANGE_LOCATION')
+    .map(action => oldState => {
+      return {
+        ...oldState,
+        location: action.payload}
+    })
+  return xs.merge(propsReducer$, dateReducer$, timeReducer$, locationReducer$)
+    .fold((state, reducer) => reducer(state), INIT_STATE)
 }
