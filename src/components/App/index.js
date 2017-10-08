@@ -2,12 +2,12 @@ import xs from 'xstream'
 import intent from './intent'
 import model from './model'
 import view from './view'
-import EventCreate from '../EventCreate'
+import {IsolatedEventCreate} from '../EventCreate'
 
 export function App (sources) {
   const eventCreateProps$ = xs.of({initialDate: new Date(), initialTime:'00:00'})
 
-  const eventCreate = EventCreate({
+  const eventCreate = IsolatedEventCreate({
     DOM: sources.DOM,
     props$: eventCreateProps$
   })

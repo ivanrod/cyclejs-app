@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@cycle/dom": "^18.3.0",
+    "@cycle/isolate": "^3.1.0",
     "@cycle/run": "^3.2.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "snabbdom-jsx": "^0.4.2",
