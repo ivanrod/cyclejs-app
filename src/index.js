@@ -5,7 +5,7 @@ import {App} from './components/App'
 const main = App
 
 const drivers = {
-  DOM: makeDOMDriver('#app')
+  DOM: makeDOMDriver(`#app`),
 }
 
-run(main, drivers)
+export const init = run(main, drivers)

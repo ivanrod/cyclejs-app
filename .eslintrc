@@ -1,3 +1,15 @@
 {
-  "extends": ["cleanjs"]
+  "extends": ["cleanjs", "cycle"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "rules": {
+    "max-len": ["error", 100],
+    "space-after-keywords": "off",
+    "space-return-throw-case": "off",
+    "keyword-spacing": [2, { "before": true, "after": true }]
+  }
 }

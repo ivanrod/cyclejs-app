@@ -1325,6 +1325,13 @@ eslint-config-cleanjs@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/eslint-config-cleanjs/-/eslint-config-cleanjs-4.0.0.tgz#f6b14e329fb680bbb27cf539820241eaceb61b9d"
 
+eslint-config-cycle@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-cycle/-/eslint-config-cycle-3.2.0.tgz#ec9eddf13b48f65d9688a0fb3d21bf96a5b88650"
+  dependencies:
+    eslint-plugin-cycle "1.0.x"
+    eslint-plugin-no-class "^0.1.0"
+
 eslint-config-standard-jsx@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/eslint-config-standard-jsx/-/eslint-config-standard-jsx-4.0.2.tgz#009e53c4ddb1e9ee70b4650ffe63a7f39f8836e1"
@@ -1350,6 +1357,10 @@ eslint-module-utils@^2.1.1:
 eslint-plugin-better@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/eslint-plugin-better/-/eslint-plugin-better-0.1.5.tgz#9e507831b6e02dbbf7525033d1bcd8ea8db39ce8"
+
+eslint-plugin-cycle@1.0.x:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-cycle/-/eslint-plugin-cycle-1.0.2.tgz#14ec15b1de548faa7c7a9d37b5e4c6d3bb050d34"
 
 eslint-plugin-fp@^2.3.0:
   version "2.3.0"
@@ -1382,6 +1393,10 @@ eslint-plugin-jsx@^0.0.2:
     eslint-plugin-react "3.4.2"
     html-tags "1"
     svg-tags "1"
+
+eslint-plugin-no-class@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-no-class/-/eslint-plugin-no-class-0.1.0.tgz#70a0863ccad70142919baf6fe946488982959cdb"
 
 eslint-plugin-node@^5.2.0:
   version "5.2.0"

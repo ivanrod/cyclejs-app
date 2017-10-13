@@ -1,10 +1,12 @@
-const getChangeValues = domSource => nodeName => domSource.select(`.${nodeName}`)
-  .events('change')
-  .map(ev => ev.target.value)
+const getChangeValues = domSource => nodeName =>
+  domSource
+    .select(`.${nodeName}`)
+    .events(`change`)
+    .map(ev => ev.target.value)
 
-export default (domSource) => {
+export default domSource => {
   return {
-    changeDate$: getChangeValues(domSource)('date'),
-    changeTime$: getChangeValues(domSource)('time')
+    changeDate$: getChangeValues(domSource)(`date`),
+    changeTime$: getChangeValues(domSource)(`time`),
   }
 }

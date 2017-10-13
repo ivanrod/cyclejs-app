@@ -1,10 +1,9 @@
-import xs from 'xstream'
-import isolate from '@cycle/isolate';
+import isolate from '@cycle/isolate'
 import intent from './intent'
 import model from './model'
 import view from './view'
 
-export default function EventCreate({DOM:domSource, props$}) {
+export default function EventCreate({DOM: domSource, props$}) {
   const actions = intent(domSource)
 
   const state$ = model(actions, props$)
@@ -14,7 +13,7 @@ export default function EventCreate({DOM:domSource, props$}) {
   const sinks = {
     DOM: vdom$,
   }
-  
+
   return sinks
 }
 

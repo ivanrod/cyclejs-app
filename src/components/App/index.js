@@ -1,11 +1,13 @@
-import xs from 'xstream'
-import intent from './intent'
-import model from './model'
-import view from './view'
-import {IsolatedEventCreate} from '../EventCreate'
+import xs from "xstream"
+import intent from "./intent"
+import model from "./model"
+import view from "./view"
+import {IsolatedEventCreate} from "../EventCreate"
 
-export function App (sources) {
-  const eventCreateProps$ = xs.periodic(100).map(p=>({initialDate: Date(), initialTime:'00:00'}))
+export function App(sources) {
+  const eventCreateProps$ = xs
+    .periodic(100)
+    .map(() => ({initialDate: Date(), initialTime: `00:00`}))
 
   const eventCreate = IsolatedEventCreate({
     DOM: sources.DOM,
@@ -17,9 +19,9 @@ export function App (sources) {
   const state$ = model(actions)
 
   const vtree$ = view(state$, eventCreate.DOM)
-  
+
   const sinks = {
-    DOM: vtree$
+    DOM: vtree$,
   }
   return sinks
 }

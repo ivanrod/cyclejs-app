@@ -1,22 +1,27 @@
-import xs from "xstream"
-import { div, h2, input, button, p, option, h } from "@cycle/dom"
-import { EventCreate } from "../EventCreate"
+import {div, h2, input, button, p, option, h} from "@cycle/dom"
 
 export default state$ => {
-  return state$.map(({ date, time, location }) =>
+  return state$.map(({date, time, location}) =>
     div([
-      h2("Event"),
-      input(`.date`, { attrs: { type: "date", name: "event-date" } }),
+      h2(`Event`),
+      input(`.date`, {attrs: {type: `date`, name: `event-date`}}),
       p(`Date selected: ${date}`),
-      input(`.time`, { attrs: { type: "time", name: "event-time" } }),
+      input(`.time`, {attrs: {type: `time`, name: `event-time`}}),
       p(`Time selected: ${time}`),
-      input(`.location`, { attrs: { type: "search", name: "event-location", placeholder: "Search location...", list:"locations" } }),
-      h('datalist#locations', [
-        option({attrs: { value: 'Madrid' }}),
-        option({attrs: { value: 'Lugo' }}),
+      input(`.location`, {
+        attrs: {
+          type: `search`,
+          name: `event-location`,
+          placeholder: `Search location...`,
+          list: `locations`,
+        },
+      }),
+      h(`datalist#locations`, [
+        option({attrs: {value: `Madrid`}}),
+        option({attrs: {value: `Lugo`}}),
       ]),
       p(`Location: ${location}`),
-      button('.create', "Create")
+      button(`.create`, `Create`),
     ])
   )
 }
