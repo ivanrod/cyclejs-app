@@ -1,33 +1,23 @@
-'use strict'
-
-const webpack = require('webpack')
-const WebpackDevServer = require('webpack-dev-server')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+import webpack from 'webpack'
+import WebpackDevServer from 'webpack-dev-server'
+import ProgressBarPlugin from 'progress-bar-webpack-plugin'
+import { config  } from './common.js'
 
 const host = 'http://localhost'
 const port = 8000
 
-const config = {
+const webpackConfig = {
   entry: [
+    ...config.entry,
     `webpack-dev-server/client?${host}:${port.toString()}`,
-    'webpack/hot/dev-server',
-    './src/'
+    'webpack/hot/dev-server'
   ],
   output: {
-    filename: 'bundle.js',
+    ...config.output,
     path: '/'
   },
   module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015']
-        },
-        exclude: /node_modules/
-      }
-    ]
+    ...config.module
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -35,7 +25,7 @@ const config = {
   ]
 }
 
-const compiler = webpack(config)
+const compiler = webpack(webpackConfig)
 compiler.plugin('done', () => {
   console.log(`App is running at ${host}:${port}`)
 })
