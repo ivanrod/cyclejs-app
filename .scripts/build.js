@@ -16,7 +16,7 @@ const compiler = webpack({
   ],
   output: {
     ...config.output,
-    path: './build/'
+    path: path.resolve(__dirname, 'build')
   },
   module: {
     ...config.module
