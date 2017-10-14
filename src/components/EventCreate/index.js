@@ -4,9 +4,9 @@ import model from './model'
 import view from './view'
 
 export default function EventCreate({DOM: domSource, props$}) {
-  const actions = intent(domSource)
+  const actions$ = intent(domSource)
 
-  const state$ = model(actions, props$)
+  const state$ = model(actions$, props$)
 
   const vdom$ = view(state$)
 
