@@ -1,0 +1,15 @@
+.container {
+    background: lightblue;
+    width: 300px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+.create {
+    color: white;
+    height: 50px;
+    width: 100px;
+    border-radius: 5px
+}

@@ -1,8 +1,9 @@
 import {div, h2, input, button, p, option, h} from "@cycle/dom"
+import './styles.css'
 
 export default state$ => {
   return state$.map(({date, time, location}) =>
-    div([
+    div(`.container`, [
       h2(`Event`),
       input(`.date`, {attrs: {type: `date`, name: `event-date`}}),
       p(`Date selected: ${date}`),

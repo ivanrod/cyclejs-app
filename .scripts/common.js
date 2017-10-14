@@ -14,6 +14,10 @@ export const config = {
           presets: ['es2015']
         },
         exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
   }
