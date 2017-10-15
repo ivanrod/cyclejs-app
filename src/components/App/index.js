@@ -19,7 +19,7 @@ export function App(sources) {
     DOM: sources.DOM,
   })
 
-  const actions = intent(sources.DOM)
+  const actions = intent(sources.DOM, eventCreate.create)
 
   const state$ = model(actions)
 

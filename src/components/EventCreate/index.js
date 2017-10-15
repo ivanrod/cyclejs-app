@@ -12,6 +12,7 @@ export default function EventCreate({DOM: domSource, props$}) {
 
   const sinks = {
     DOM: vdom$,
+    create: domSource.select(`.create`).events(`click`).map(() => state$.take(1)).flatten(),
   }
 
   return sinks

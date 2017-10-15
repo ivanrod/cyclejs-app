@@ -1,12 +1,7 @@
-const getChangeValues = domSource => nodeName =>
-  domSource
-    .select(`.${nodeName}`)
-    .events(`change`)
-    .map(ev => ev.target.value)
+import xs from 'xstream'
 
-export default domSource => {
-  return {
-    changeDate$: getChangeValues(domSource)(`date`),
-    changeTime$: getChangeValues(domSource)(`time`),
-  }
+export default (domSource, eventCreate) => {
+  const createEvent$ = eventCreate.map(event => ({type: `CREATE_EVENT`, payload: event}))
+
+  return xs.merge(createEvent$)
 }
