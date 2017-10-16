@@ -2,14 +2,11 @@ import {div, ul, li} from "@cycle/dom"
 import './styles.css'
 
 export default ($state) => {
-  return $state.map(() =>
+  return $state.map(({events}) =>
     div(
       [
         ul(
-          [
-            li(`Event 1`),
-            li(`Event 2`),
-          ]
+          events && events.map(event => li(event.date))
         ),
       ]
     )

@@ -15,13 +15,15 @@ export function App(sources) {
     props$: eventCreateProps$,
   })
 
-  const eventList = EventList({
-    DOM: sources.DOM,
-  })
 
   const actions = intent(sources.DOM, eventCreate.create)
 
   const state$ = model(actions)
+
+  const eventList = EventList({
+    DOM: sources.DOM,
+    props$: state$.map(state => state.events),
+  })
 
   const vtree$ = view(state$, eventCreate.DOM, eventList.DOM)
 
