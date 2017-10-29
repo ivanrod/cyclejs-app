@@ -1,4 +1,4 @@
-import {div, ul, li} from "@cycle/dom"
+import {div, ul, li, p} from "@cycle/dom"
 import './styles.css'
 
 export default ($state) => {
@@ -6,7 +6,12 @@ export default ($state) => {
     div(
       [
         ul(
-          events && events.map(event => li(event.date))
+          events && events.map(event => li([
+            p(event.date),
+            p(event.time),
+            p(event.location),
+            p(`.remove`, `X`),
+          ]))
         ),
       ]
     )

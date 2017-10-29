@@ -4,7 +4,7 @@ import './styles.css'
 export default state$ => {
   return state$.map(({date, time, location}) =>
     div(`.container`, [
-      h2(`Event`),
+      h2(`New Event`),
       input(`.date`, {attrs: {type: `date`, name: `event-date`}}),
       p(`Date selected: ${date}`),
       input(`.time`, {attrs: {type: `time`, name: `event-time`}}),

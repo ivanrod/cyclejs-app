@@ -2,5 +2,5 @@ import xs from "xstream"
 
 export default function(action$, props$) {
 
-  return xs.merge(props$)
+  return props$.map(props => ({events: props})).startWith({events: []})
 }

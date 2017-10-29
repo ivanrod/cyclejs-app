@@ -19,7 +19,6 @@ export default (state$, eventCreateDOM, eventListDOM) => {
             eventList,
           ]
         ),
-        ul(events.map(event => (li(event.date))))
       ])
     )
 }
