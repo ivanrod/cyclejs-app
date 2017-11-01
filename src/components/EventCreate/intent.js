@@ -8,6 +8,7 @@ const createChangeValuesAction = domSource => nodeName => eventType =>
 
 export default domSource => {
   return xs.merge(
+    createChangeValuesAction(domSource)(`name`)(`CHANGE_NAME`),
     createChangeValuesAction(domSource)(`date`)(`CHANGE_DATE`),
     createChangeValuesAction(domSource)(`time`)(`CHANGE_TIME`),
     createChangeValuesAction(domSource)(`location`)(`CHANGE_LOCATION`)

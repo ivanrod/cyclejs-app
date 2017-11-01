@@ -1,4 +1,6 @@
 .container {
+    display: flex;
+    flex-direction: column;
     background: lightblue;
     width: 300px;
     border-radius: 10px;
@@ -11,5 +13,6 @@
     color: white;
     height: 50px;
     width: 100px;
-    border-radius: 5px
+    border-radius: 5px;
+    margin: 0 auto;
 }

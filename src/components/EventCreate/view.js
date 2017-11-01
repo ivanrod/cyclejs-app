@@ -5,6 +5,7 @@ export default state$ => {
   return state$.map(({date, time, location}) =>
     div(`.container`, [
       h2(`New Event`),
+      input(`.name`, {attrs: {placeholder: `Event name...`}}),
       input(`.date`, {attrs: {type: `date`, name: `event-date`}}),
       p(`Date selected: ${date}`),
       input(`.time`, {attrs: {type: `time`, name: `event-time`}}),

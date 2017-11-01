@@ -6,7 +6,8 @@ export default ($state) => {
     div(
       [
         ul(
-          events && events.map(event => li([
+          events && events.map(event => li(`.item`, [
+            p(event.name),
             p(event.date),
             p(event.time),
             p(event.location),
