@@ -6,11 +6,11 @@ export default ($state) => {
     div(
       [
         ul(
-          events && events.map(event => li(`.item`, [
-            p(event.name),
-            p(event.date),
-            p(event.time),
-            p(event.location),
+          events && Object.keys(events).map(event => li(`.item`, [
+            p(event),
+            p(events[event].date),
+            p(events[event].time),
+            p(events[event].location),
             p(`.remove`, `X`),
           ]))
         ),

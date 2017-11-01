@@ -1,6 +1,7 @@
 import xs from 'xstream'
 
 const INIT_STATE = {
+  name: ``,
   date: Date(),
   time: `00:00`,
   location: `Not defined`,

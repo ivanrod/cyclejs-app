@@ -7,13 +7,17 @@ const INIT_STATE = {
 export default (action$) => {
   const createEventReducer$ = action$
     .filter(({type}) => type === `CREATE_EVENT`)
-    .map(({payload}) => state => {
+    .map(({payload: {name, date, time, location}}) => state => {
       return {
         ...state,
-        events: [
+        events: {
           ...state.events,
-          payload,
-        ],
+          [name]: {
+            date,
+            time,
+            location,
+          },
+        },
       }
     })
   return xs.merge(createEventReducer$)
