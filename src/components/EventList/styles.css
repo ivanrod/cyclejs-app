@@ -1,7 +1,20 @@
+.event-list {
+  list-style-type: none;
+  padding: 0;
+}
+.item__title.item:nth-child(odd) {
+  background: blue;
+  color: white;
+}
 .item {
   display: flex;
+  justify-content: space-between;
+  background: green;
+}
+.item:nth-child(odd) {
+  background: red;
 }
 
 .item > p {
-  margin: 10px
+  margin: 10px;
 }
