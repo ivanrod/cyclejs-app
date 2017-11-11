@@ -6,7 +6,7 @@ export default $state => {
     div([
       ul(`.event-list`,
         events && [
-          li(`.item__title .item`, [p(`Name`), p(`Date`), p(`Time`), p(`Location`)]),
+          li(`.item__title .item`, [p(`Name`), p(`Date`), p(`Time`), p(`Location`), p(`Delete`)]),
           ...Object.keys(events).map(event =>
             li(`.item`, [
               p(event),
