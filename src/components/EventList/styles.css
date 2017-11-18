@@ -3,18 +3,38 @@
   padding: 0;
 }
 .item__title.item:nth-child(odd) {
-  background: blue;
+  background: #36366d;
   color: white;
 }
 .item {
   display: flex;
-  justify-content: space-between;
-  background: green;
+  justify-content: center;
+  background: #3b8e3b;
+  border-radius: 5px;
 }
 .item:nth-child(odd) {
-  background: red;
+  background: #2e672e;
 }
-
+.item__content {
+  overflow: scroll;
+  cursor: pointer;
+}
+.item__content:hover {
+  opacity: 0.9;
+}
+.item__content:active {
+  transition: opacity 1s;
+  opacity: 0.5;
+}
+.item__column {
+  text-align: center;
+  overflow: scroll;
+  flex: 1;
+}
+.item__remove {
+  text-align: center;
+  flex: 0.5;
+}
 .item > p {
   margin: 10px;
 }

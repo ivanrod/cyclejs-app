@@ -1,4 +1,5 @@
 import {div, ul, li, p} from "@cycle/dom"
+import moment from "moment"
 import "./styles.css"
 
 export default $state => {
@@ -6,14 +7,20 @@ export default $state => {
     div([
       ul(`.event-list`,
         events && [
-          li(`.item__title .item`, [p(`Name`), p(`Date`), p(`Time`), p(`Location`), p(`Delete`)]),
+          li(`.item .item__title`, [
+            p(`.item__column`, `Name`),
+            p(`.item__column`, `Date`),
+            p(`.item__column`, `Time`),
+            p(`.item__column`, `Location`),
+            p(`.item__remove`, `Delete`),
+          ]),
           ...Object.keys(events).map(event =>
-            li(`.item`, [
-              p(event),
-              p(events[event].date),
-              p(events[event].time),
-              p(events[event].location),
-              p(`.remove`, `X`),
+            li(`.item .item__content`, [
+              p(`.item__column`, event),
+              p(`.item__column`, moment(events[event].date).format(`LL`)),
+              p(`.item__column`, events[event].time),
+              p(`.item__column`, events[event].location),
+              p(`.item__remove`, `X`),
             ])
           ),
         ]

@@ -1,3 +1,4 @@
+import moment from "moment"
 import {div, h2, input, button, p, option, h} from "@cycle/dom"
 import './styles.css'
 
@@ -7,7 +8,7 @@ export default state$ => {
       h2(`New Event`),
       input(`.name`, {attrs: {placeholder: `Event name...`}}),
       input(`.date`, {attrs: {type: `date`, name: `event-date`}}),
-      p(`Date selected: ${date}`),
+      p(`Date selected: ${moment(date).format(`LL`)}`),
       input(`.time`, {attrs: {type: `time`, name: `event-time`}}),
       p(`Time selected: ${time}`),
       input(`.location`, {
