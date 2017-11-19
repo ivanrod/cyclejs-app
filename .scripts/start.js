@@ -19,6 +19,7 @@ const webpackConfig = {
   module: {
     ...config.module
   },
+  devtool: 'source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new ProgressBarPlugin()
@@ -36,7 +37,7 @@ const server = new WebpackDevServer(compiler, {
   stats: 'errors-only',
   setup: (app) => {
     app.post('/event', function (req, res) {
-      res.send('200OK', req, res);
+      res.send('200OK');
     })
   }
 })
