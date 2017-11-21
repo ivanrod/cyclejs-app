@@ -1,25 +1,44 @@
 import xs from 'xstream'
 
-const INIT_STATE = {
-  events: [],
+// Init State
+export const initReducer$ = xs.of(() => {
+  return {
+    entities: {
+      events: {},
+    },
+    eventList: [],
+    currentEvent: {},
+  }
+})
+
+// Lenses
+export const eventCreateLens = {
+  get: state => ({
+    events: state.entities.events,
+    eventList: state.eventList,
+    currentEvent: state.currentEvent,
+  }),
+  set: (state, childState) => ({
+    ...state,
+    currentEvent: childState.currentEvent,
+    eventList: childState.eventList,
+    entities: {
+      ...state.entities,
+      events: childState.events,
+    },
+  }),
 }
 
-export default (action$) => {
-  const createEventReducer$ = action$
-    .filter(({type}) => type === `CREATE_EVENT`)
-    .map(({payload: {name, date, time, location}}) => state => {
-      return {
-        ...state,
-        events: {
-          ...state.events,
-          [name]: {
-            date,
-            time,
-            location,
-          },
-        },
-      }
-    })
-  return xs.merge(createEventReducer$)
-    .fold((state, reducer) => reducer(state), INIT_STATE)
+export const eventListLens = {
+  get: state => ({
+    events: state.entities.events,
+    eventList: state.eventList,
+  }),
+  set: (state, childState) => ({
+    ...state,
+    entities: {
+      ...state.entities,
+      events: childState.events,
+    },
+  }),
 }

@@ -1,34 +1,21 @@
 import xs from "xstream"
-import intent from "./intent"
-import model from "./model"
+import isolate from '@cycle/isolate'
+import {initReducer$, eventCreateLens, eventListLens} from "./model"
 import view from "./view"
-import {IsolatedEventCreate} from "../EventCreate"
+import EventCreate from "../EventCreate"
 import {EventList} from '../EventList'
 
 export function App(sources) {
-  const eventCreateProps$ = xs
-    .periodic(100)
-    .map(() => ({initialDate: Date(), initialTime: `00:00`}))
+  const eventCreate = isolate(EventCreate, {onion: eventCreateLens})(sources)
+  const eventList = isolate(EventList, {onion: eventListLens})(sources)
 
-  const eventCreate = IsolatedEventCreate({
-    DOM: sources.DOM,
-    props$: eventCreateProps$,
-  })
+  const reducer$ = xs.merge(initReducer$, eventCreate.onion)
 
-
-  const actions = intent(sources.DOM, eventCreate.create)
-
-  const state$ = model(actions)
-
-  const eventList = EventList({
-    DOM: sources.DOM,
-    props$: state$.map(state => state.events),
-  })
-
-  const vtree$ = view(state$, eventCreate.DOM, eventList.DOM)
+  const vtree$ = view(eventCreate.DOM, eventList.DOM)
 
   const sinks = {
     DOM: vtree$,
+    onion: reducer$,
   }
   return sinks
 }

@@ -3,7 +3,7 @@ import {div, h2, input, button, p, option, h} from "@cycle/dom"
 import './styles.css'
 
 export default state$ => {
-  return state$.map(({date, time, location}) =>
+  return state$.map(({currentEvent: {date, time, location}}) =>
     div(`.container`, [
       h2(`New Event`),
       input(`.name`, {attrs: {placeholder: `Event name...`}}),

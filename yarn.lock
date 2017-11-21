@@ -11,7 +11,7 @@
     snabbdom "0.7.0"
     snabbdom-selector "1.2.1"
 
-"@cycle/isolate@^3.1.0":
+"@cycle/isolate@>=3", "@cycle/isolate@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@cycle/isolate/-/isolate-3.1.0.tgz#fb1581750d413f80c230637e17fc248be7dfd16f"
 
@@ -1476,6 +1476,14 @@ currently-unhandled@^0.4.1:
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
   dependencies:
     array-find-index "^1.0.1"
+
+cycle-onionify@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/cycle-onionify/-/cycle-onionify-4.0.0.tgz#9aeddd88dedf6fda9fbb98b1e79ab38810b7ddda"
+  dependencies:
+    "@cycle/isolate" ">=3"
+    "@cycle/run" "*"
+    xstream ">=10"
 
 d@1:
   version "1.0.0"
@@ -5055,7 +5063,7 @@ xstream@10.x:
   dependencies:
     symbol-observable "^1.0.2"
 
-xstream@^11.0.0:
+xstream@>=10, xstream@^11.0.0:
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/xstream/-/xstream-11.0.0.tgz#2018c3c4e573f76b62b9cf96a17a46876ab120e0"
   dependencies:

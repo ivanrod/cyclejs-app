@@ -1,33 +1,36 @@
 import xs from 'xstream'
 
 const INIT_STATE = {
-  name: ``,
-  date: Date(),
-  time: `00:00`,
-  location: `Not defined`,
+  currentEvent: {
+    name: ``,
+    date: Date.now(),
+    time: `00:00`,
+    location: `Not defined`,
+  },
+  eventList: [],
+  events: {},
 }
 
-const modifyStatePropertyReducer = action => type => property => action
+const modifyStatePropertyReducer = action$ => type => property => action$
   .filter(a => a.type === type)
-  .map(mapAction => state => {
+  .map(action => state => {
     return {
       ...state,
-      [property]: mapAction.payload}
+      currentEvent: {
+        ...state.currentEvent,
+        [property]: action.payload,
+      },
+    }
   })
 
-export default (action$, props$) => {
-  const propsReducer$ = props$.map(props => state => ({
-    ...state,
-    date: props.initialDate || state.date,
-    time: props.initialTime || state.time,
-    location: props.initialLocation || state.location,
-  })).take(1)
+export default (action$) => {
+  const defaultReducer$ = xs.of((prevState) =>
+    typeof prevState === `undefined` ? INIT_STATE : prevState)
 
   const nameReducer$ = modifyStatePropertyReducer(action$)(`CHANGE_NAME`)(`name`)
   const dateReducer$ = modifyStatePropertyReducer(action$)(`CHANGE_DATE`)(`date`)
   const timeReducer$ = modifyStatePropertyReducer(action$)(`CHANGE_TIME`)(`time`)
   const locationReducer$ = modifyStatePropertyReducer(action$)(`CHANGE_LOCATION`)(`location`)
 
-  return xs.merge(nameReducer$, propsReducer$, dateReducer$, timeReducer$, locationReducer$)
-    .fold((state, reducer) => reducer(state), INIT_STATE)
+  return xs.merge(defaultReducer$, nameReducer$, dateReducer$, timeReducer$, locationReducer$)
 }

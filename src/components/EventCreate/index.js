@@ -3,16 +3,18 @@ import intent from './intent'
 import model from './model'
 import view from './view'
 
-export default function EventCreate({DOM: domSource, props$}) {
-  const actions$ = intent(domSource)
+export default function EventCreate(sources) {
+  const state$ = sources.onion.state$
 
-  const state$ = model(actions$, props$)
+  const actions$ = intent(sources.DOM)
+
+  const reducer$ = model(actions$)
 
   const vdom$ = view(state$)
 
   const sinks = {
     DOM: vdom$,
-    create: domSource.select(`.create`).events(`click`).map(() => state$.take(1)).flatten(),
+    onion: reducer$,
   }
 
   return sinks

@@ -1,10 +1,10 @@
 import xs from 'xstream'
-import {div, h1, ul, li, header, article} from '@cycle/dom'
+import {div, h1, header, article} from '@cycle/dom'
 import './styles.css'
 
-export default (state$, eventCreateDOM, eventListDOM) => {
-  return xs.combine(state$, eventCreateDOM, eventListDOM)
-    .map(([{events}, eventCreate, eventList]) =>
+export default (eventCreateDOM, eventListDOM) => {
+  return xs.combine(eventCreateDOM, eventListDOM)
+    .map(([eventCreate, eventList]) =>
       div([
         header(`.header`,
           h1(`.title`, `waitForMe!`)

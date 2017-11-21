@@ -37,6 +37,7 @@
     "@cycle/dom": "^18.3.0",
     "@cycle/isolate": "^3.1.0",
     "@cycle/run": "^3.2.0",
+    "cycle-onionify": "^4.0.0",
     "moment": "^2.19.2",
     "snabbdom-jsx": "^0.4.2",
     "xstream": "^11.0.0"
