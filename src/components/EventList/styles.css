@@ -17,7 +17,7 @@
 }
 .item__content {
   overflow: scroll;
-  cursor: pointer;
+  cursor: zoom-in;
 }
 .item__content:hover {
   opacity: 0.9;
@@ -33,7 +33,13 @@
 }
 .item__remove {
   text-align: center;
+  border-radius: 5px;
   flex: 0.5;
+}
+.item__remove:hover {
+    transition: background-color 1s;
+    cursor: pointer;
+    background: red;
 }
 .item > p {
   margin: 10px;

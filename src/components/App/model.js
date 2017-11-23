@@ -30,15 +30,9 @@ export const eventCreateLens = {
 }
 
 export const eventListLens = {
-  get: state => ({
-    events: state.entities.events,
-    eventList: state.eventList,
-  }),
+  get: state => state.eventList.map(name => ({...state.entities.events[name], name})),
   set: (state, childState) => ({
     ...state,
-    entities: {
-      ...state.entities,
-      events: childState.events,
-    },
+    eventList: childState.map(event => event.name),
   }),
 }

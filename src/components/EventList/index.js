@@ -1,18 +1,34 @@
-import intent from "./intent"
-import model from "./model"
-import view from "./view"
+import {div, ul, li, p} from "@cycle/dom"
+import {makeCollection} from 'cycle-onionify'
 
-export function EventList(sources) {
-  const state$ = sources.onion.state$
+import "./styles.css"
 
-  const actions = intent(sources.DOM)
+import EventItem from "../EventItem"
 
-  // const reducer$ = model(actions)
-
-  const vtree$ = view(state$)
-
-  const sinks = {
-    DOM: vtree$,
-  }
-  return sinks
-}
+export default makeCollection({
+  item: EventItem,
+  itemKey: state => state.name,
+  itemScope: key => key,
+  collectSinks: instances => ({
+    DOM: instances
+      .pickCombine(`DOM`)
+      .map(vnodes =>
+        div([
+          ul(
+            `.event-list`,
+            vnodes && [
+              li(`.item .item__title`, [
+                p(`.item__column`, `Name`),
+                p(`.item__column`, `Date`),
+                p(`.item__column`, `Time`),
+                p(`.item__column`, `Location`),
+                p(`.item__remove`, `Delete`),
+              ]),
+              ...vnodes,
+            ]
+          ),
+        ])
+      ),
+    onion: instances.pickMerge(`onion`),
+  }),
+})
