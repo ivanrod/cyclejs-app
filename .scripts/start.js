@@ -1,6 +1,7 @@
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
+import shortid from 'shortid'
 import { config  } from './common.js'
 
 const host = 'http://localhost'
@@ -37,7 +38,7 @@ const server = new WebpackDevServer(compiler, {
   stats: 'errors-only',
   setup: (app) => {
     app.post('/event', function (req, res) {
-      res.send('200OK');
+      res.send(JSON.stringify({id: shortid.generate()}));
     })
   }
 })
