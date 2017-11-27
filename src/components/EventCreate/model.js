@@ -33,11 +33,11 @@ export default (action$) => {
       ...state,
       eventList: [
         ...state.eventList,
-        state.currentEvent.name,
+        action.payload.id,
       ],
       events: {
         ...state.events,
-        [state.currentEvent.name]: {...state.currentEvent},
+        [action.payload.id]: {...state.currentEvent},
       },
     }))
 

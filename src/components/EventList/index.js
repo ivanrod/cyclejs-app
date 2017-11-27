@@ -7,7 +7,7 @@ import EventItem from "../EventItem"
 
 export default makeCollection({
   item: EventItem,
-  itemKey: state => state.name,
+  itemKey: state => state.id,
   itemScope: key => key,
   collectSinks: instances => ({
     DOM: instances

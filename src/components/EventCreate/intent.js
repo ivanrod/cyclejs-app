@@ -10,7 +10,7 @@ export default (domSource, HTTP, state$) => {
   const addEvent$ = HTTP
     .select(`event`)
     .flatten()
-    .map((res) => ({type: `ADD_EVENT`, payload: res.body}))
+    .map((res) => ({type: `ADD_EVENT`, payload: JSON.parse(res.text)}))
 
   const sendEvent$ = domSource
     .select(`.create`)
