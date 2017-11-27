@@ -9,6 +9,8 @@ export function App(sources) {
   const eventCreate = isolate(EventCreate, {onion: eventCreateLens})(sources)
   const eventList = isolate(EventList, {onion: eventListLens})(sources)
 
+  const request$ = xs.merge(eventCreate.HTTP)
+
   const reducer$ = xs.merge(initReducer$, eventCreate.onion, eventList.onion)
 
   const vtree$ = view(eventCreate.DOM, eventList.DOM)
@@ -16,6 +18,7 @@ export function App(sources) {
   const sinks = {
     DOM: vtree$,
     onion: reducer$,
+    HTTP: request$,
   }
   return sinks
 }

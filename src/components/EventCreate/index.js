@@ -6,15 +6,16 @@ import view from './view'
 export default function EventCreate(sources) {
   const state$ = sources.onion.state$
 
-  const actions$ = intent(sources.DOM)
+  const actions = intent(sources.DOM, sources.HTTP, state$)
 
-  const reducer$ = model(actions$)
+  const reducer$ = model(actions.state)
 
   const vdom$ = view(state$)
 
   const sinks = {
     DOM: vdom$,
     onion: reducer$,
+    HTTP: actions.http,
   }
 
   return sinks
