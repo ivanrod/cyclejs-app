@@ -21,6 +21,7 @@ const compiler = webpack({
   module: {
     ...config.module
   },
+  resolve: config.resolve,
   plugins: [
     new ProgressBarPlugin(),
     new webpack.optimize.UglifyJsPlugin({minimize: true})

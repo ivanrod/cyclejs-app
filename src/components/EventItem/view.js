@@ -9,7 +9,7 @@ export default state$ => {
       p(`.item__column`, moment(event.date).format(`LL`)),
       p(`.item__column`, event.time),
       p(`.item__column`, event.location),
-      p(`.item__remove`, `X`),
+      p(`.item__remove`, `✖`),
     ])
   )
 }

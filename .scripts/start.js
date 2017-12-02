@@ -20,6 +20,7 @@ const webpackConfig = {
   module: {
     ...config.module
   },
+  resolve: config.resolve,
   devtool: 'source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

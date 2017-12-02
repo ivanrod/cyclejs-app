@@ -1,24 +1,29 @@
+import path from "path"
+console.log(path.resolve(__dirname, "../src/utils/"))
 export const config = {
-  entry: [
-    './src/'
-  ],
+  entry: ["./src/"],
   output: {
-    filename: 'bundle.js'
+    filename: "bundle.js"
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         query: {
-          presets: ['es2015']
+          presets: ["es2015"]
         },
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: ["style-loader", "css-loader"]
       }
     ]
+  },
+  resolve: {
+    alias: {
+      "@utils": path.resolve(__dirname, "../src/utils/")
+    }
   }
 }
