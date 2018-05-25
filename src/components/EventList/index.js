@@ -1,5 +1,5 @@
 import {div, ul, li, p} from "@cycle/dom"
-import {makeCollection} from 'cycle-onionify'
+import {makeCollection} from "cycle-onionify"
 
 import "./styles.css"
 
