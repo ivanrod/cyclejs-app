@@ -40,6 +40,7 @@
     "@cycle/run": "^3.2.0",
     "cycle-onionify": "^4.0.0",
     "moment": "^2.19.2",
+    "ramda": "^0.25.0",
     "shortid": "^2.2.8",
     "snabbdom-jsx": "^0.4.2",
     "xstream": "^11.0.0"
