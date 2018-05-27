@@ -1,5 +1,3 @@
-import xs from "xstream"
-
 export default domSource => {
   return domSource
     .select(`.item__remove`)

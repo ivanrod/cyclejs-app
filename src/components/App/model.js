@@ -4,35 +4,35 @@ import xs from 'xstream'
 export const initReducer$ = xs.of(() => {
   return {
     entities: {
-      events: {},
+      foods: {},
     },
-    eventList: [],
-    currentEvent: {},
+    foodList: [],
+    currentFood: ``,
   }
 })
 
 // Lenses
-export const eventCreateLens = {
+export const searchLens = {
   get: state => ({
-    events: state.entities.events,
-    eventList: state.eventList,
-    currentEvent: state.currentEvent,
+    foods: state.entities.foods,
+    foodList: state.foodList,
+    currentFood: state.currentFood,
   }),
   set: (state, childState) => ({
     ...state,
-    currentEvent: childState.currentEvent,
-    eventList: childState.eventList,
+    currentFood: childState.currentFood,
+    foodList: childState.foodList,
     entities: {
       ...state.entities,
-      events: childState.events,
+      foods: childState.foods,
     },
   }),
 }
 
-export const eventListLens = {
-  get: state => state.eventList.map(id => ({...state.entities.events[id], id})),
+export const listLens = {
+  get: state => state.foodList.map(id => ({...state.entities.foods[id], id})),
   set: (state, childState) => ({
     ...state,
-    eventList: childState.map(event => event.id),
+    foodList: childState.map(food => food.id),
   }),
 }

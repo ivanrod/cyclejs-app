@@ -3,10 +3,10 @@ import {makeCollection} from "cycle-onionify"
 
 import "./styles.css"
 
-import EventItem from "../EventItem"
+import Item from "../Item"
 
 export default makeCollection({
-  item: EventItem,
+  item: Item,
   itemKey: state => state.id,
   itemScope: key => key,
   collectSinks: instances => ({

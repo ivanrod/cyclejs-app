@@ -2,21 +2,21 @@ import xs from 'xstream'
 import {div, h1, header, article} from '@cycle/dom'
 import './styles.css'
 
-export default (eventCreateDOM, eventListDOM) => {
-  return xs.combine(eventCreateDOM, eventListDOM)
-    .map(([eventCreate, eventList]) =>
+export default (searchDOM, listDOM) => {
+  return xs.combine(searchDOM, listDOM)
+    .map(([search, list]) =>
       div([
         header(`.header`,
-          h1(`.title`, `waitForMe!`)
+          h1(`.title`, `food search!`)
         ),
         article(`.creators`,
           [
-            eventCreate,
+            search,
           ]
         ),
         article(`.event-list`,
           [
-            eventList,
+            list,
           ]
         ),
       ])

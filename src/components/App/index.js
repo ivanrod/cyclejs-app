@@ -1,19 +1,19 @@
 import xs from "xstream"
 import isolate from '@cycle/isolate'
-import {initReducer$, eventCreateLens, eventListLens} from "./model"
+import {initReducer$, searchLens, listLens} from "./model"
 import view from "./view"
-import EventCreate from "../EventCreate"
-import EventList from '../EventList'
+import Search from "../Search"
+import List from '../List'
 
 export function App(sources) {
-  const eventCreate = isolate(EventCreate, {onion: eventCreateLens})(sources)
-  const eventList = isolate(EventList, {onion: eventListLens})(sources)
+  const search = isolate(Search, {onion: searchLens})(sources)
+  const list = isolate(List, {onion: listLens})(sources)
 
-  const request$ = xs.merge(eventCreate.HTTP)
+  const request$ = xs.merge(search.HTTP)
 
-  const reducer$ = xs.merge(initReducer$, eventCreate.onion, eventList.onion)
+  const reducer$ = xs.merge(initReducer$, search.onion, list.onion).debug(x=>console.log(x))
 
-  const vtree$ = view(eventCreate.DOM, eventList.DOM)
+  const vtree$ = view(search.DOM, list.DOM)
 
   const sinks = {
     DOM: vtree$,
