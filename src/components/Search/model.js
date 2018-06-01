@@ -30,6 +30,14 @@ const innerReducers = {
     ...state,
     selectableFood: action.payload,
   }),
+  SET_LOADING: action => state => ({
+    ...state,
+    loading: action.payload,
+  }),
+  REQUEST_ERROR: action => state => ({
+    ...state,
+    error: action.payload,
+  }),
   default: () => state => state,
 }
 
@@ -38,12 +46,9 @@ export const innerModel = action$ => action$
     return (innerReducers[action.type] || innerReducers.default)(action)(acc)
   }, {
     selectableFood: [],
+    loading: false,
   })
-  // .map(action => (innerReducers[action.type] || innerReducers.default)(action))
-  // .startWith({
-  //   selectableFood: [],
-  // })
-  .debug(x=>console.log('pene', x))
+  // .debug(data=>console.log('Debug innerModel:', data))
 
 export default action$ => xs.merge(
   ...createReducers(action$)(reducers),

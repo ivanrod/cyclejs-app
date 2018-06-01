@@ -1,42 +1,46 @@
 import xs from "xstream"
 import debounce from "xstream/extra/debounce"
-import {parseJSON} from "@utils/parseJson"
+import {normalizeFoods, createSearchRequest} from "@utils/requests"
 
-const normalizeFoods = errorAction => res => {
-  const parsedResponse = parseJSON((err) => {
-    console.error(err)
-    return errorAction
-  })(res)
-
-  return parsedResponse.errors || !parsedResponse.list ? errorAction : parsedResponse.list.item
-}
-
-const createChangeValuesAction = domSource => nodeName => eventType =>
-  domSource
-    .select(`.${nodeName}`)
-    .events(`change`)
-    .map(ev => ({type: eventType, payload: ev.target.value}))
+const setSelectableFood = foods => ({type: `SET_SELECTABLE_FOOD`, payload: foods})
+const setLoading = loading => ({type: `SET_LOADING`, payload: loading})
+const generateRequestError = error => ({type: `REQUEST_ERROR`, payload: error})
 
 export default (domSource, HTTP) => {
+  const input$ = domSource
+    .select(`.search__input`)
+    .events(`input`)
+    .map(ev => ev.target.value)
+
+  const filteredInput$ = input$
+    .filter(text => !!text)
+
+  const sendTerm$ = filteredInput$
+    .compose(debounce(500))
+    .map(createSearchRequest)
+
   const fetchFood$ = HTTP.select(`other`)
     .flatten()
     .map(res => res.text)
-    .map(normalizeFoods({type: `SET_SELECTABLE_FOOD`, payload: []}))
-    .map(res => ({type: `SET_SELECTABLE_FOOD`, payload: res}))
+    .map(normalizeFoods([]))
 
-  const sendTerm$ = domSource
-    .select(`.search__input`)
-    .events(`input`)
-    .compose(debounce(500))
-    .map(ev => ev.target.value)
-    .map(term => ({
-      url: `https://api.nal.usda.gov/ndb/search/?format=json&q=${term}&qs=Standard Reference&sort=n&max=25&offset=0&api_key=DEMO_KEY`,
-      category: `other`,
-      method: `get`,
-    }))
+  const filteredFetch$ = xs
+    .combine(input$, fetchFood$)
+    .map(([text, foods]) => {
+      const selectableFoodAction = text ? setSelectableFood(foods) : setSelectableFood([])
+
+      return xs.of(setLoading(false), selectableFoodAction)
+    })
+    .flatten()
+    .replaceError(error => xs.of(setLoading(false), generateRequestError(error)))
+
+  const action$ = xs.merge(
+    filteredFetch$,
+    filteredInput$.map(() => setLoading(true))
+  )
 
   return {
-    state: xs.merge(fetchFood$, createChangeValuesAction(domSource)(`search-food`)(`SEARCH_FOOD`)),
+    state: action$,
     http: sendTerm$,
   }
 }
