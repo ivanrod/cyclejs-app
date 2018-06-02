@@ -2,7 +2,7 @@ import {div, input, p, ul, li} from "@cycle/dom"
 import "./styles.css"
 
 export default state$ => {
-  return state$.map(({selectableFood, loading, error}) =>
+  return state$.map(({selectableFood, loading, error, opened}) =>
     div(`.container`, [
       input(`.search__input`, {
         attrs: {
@@ -12,7 +12,7 @@ export default state$ => {
           list: `foods`,
         },
       }),
-      ul(
+      opened && ul(
         `.search__list`,
         loading ?
           [li(`.search__list--item`, p(error || `Loading...`))] :
@@ -20,10 +20,10 @@ export default state$ => {
             li(
               `.search__list--item`,
               {attrs: {value: selectableFood[id].name}},
-              p(selectableFood[id].name)
+              p(`.search__list--text`, selectableFood[id].name)
             )
           )
       ),
-    ])
+    ].filter(Boolean))
   )
 }

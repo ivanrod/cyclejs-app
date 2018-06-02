@@ -5,6 +5,8 @@ const INIT_STATE = {
   currentFood: ``,
   foodList: [],
   foods: {},
+  error: false,
+  opened: false,
 }
 
 const reducers = {
@@ -34,6 +36,10 @@ const innerReducers = {
     ...state,
     loading: action.payload,
   }),
+  SET_OPENED: action => state => ({
+    ...state,
+    opened: action.payload,
+  }),
   REQUEST_ERROR: action => state => ({
     ...state,
     error: action.payload,
@@ -47,6 +53,7 @@ export const innerModel = action$ => action$
   }, {
     selectableFood: [],
     loading: false,
+    opened: false,
   })
   // .debug(data=>console.log('Debug innerModel:', data))
 
